@@ -10,8 +10,10 @@ $( document ).ready(function() {
     var count=1
     function startSlider(){
     	 interval=setInterval(function(){
+    	 	$slideContainer.css('float','left');
     		$slideContainer.animate({'margin-left': '-='+width},animationSpeed,function(){
     			currentSlide++;
+    			dot();
     			if(currentSlide===$slides.length){
     				currentSlide=1;
     				$slideContainer.css('margin-left',0);
@@ -31,12 +33,13 @@ $(".next").click(function(){
 	stopSlider();
 	$slideContainer.css('float','left')
   $slideContainer.animate({'margin-left': '-='+width},function(){
-  	  count++
+  	currentSlide++;
+  	  dot();
   console.log(count);
-  if(count==4)
+  if(currentSlide===$slides.length)
   {
+  	currentSlide = 1;
   	$slideContainer.css('margin-left',0);
-  	count=1;
   }
   });
 
@@ -46,15 +49,35 @@ $(".prev").click(function(){
   stopSlider();
   $slideContainer.css('float','right')
   $slideContainer.animate({'margin-right': '-='+width},function(){
-  count++
+  currentSlide++;
+  dot();
   console.log(count);
-  if(count==4)
+  if(currentSlide===$slides.length)
   {
+  	currentSlide = 1;
   	$slideContainer.css('margin-right',0);
-  	count=1;
   }
   });
 
 });
+
+function dot(){
+				count++;
+    			if(count == 2){
+    				$('.cir1').css('color','black');
+    				$('.cir2').css('color','red');
+    			}
+    			if(count == 3){
+    				$('.cir1').css('color','black');
+    				$('.cir2').css('color','black');
+    				$('.cir3').css('color','red');
+    			}
+    			if(count == 4){
+    				$('.cir1').css('color','red');
+    				$('.cir2').css('color','black');
+    				$('.cir3').css('color','black');
+    				count = 1;
+    			}
+}
 
 });
